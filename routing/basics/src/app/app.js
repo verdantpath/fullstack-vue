@@ -1,3 +1,5 @@
+import { createRouter, createWebHistory } from 'vue-router';
+
 const DunkirkBlurb = {
   name: 'dunkirk-blurb',
   template: `<div>
@@ -32,59 +34,42 @@ const TheDarkKnightRisesBlurb = {
 }
 
 const routes = [
-    {
-      path: '/',
-      component: {
-        name: 'index-blurb',
-        template: `<h2>Pick a Christopher Nolan movie!</h2>`
-      }
+  {
+    path: '/',
+    component: {
+      name: 'index-blurb',
+      template: `<h2>Pick a Christopher Nolan movie!</h2>`
+    }
   },
   {path: '/dunkirk', component: DunkirkBlurb},
   {path: '/interstellar', component: InterstellarBlurb},
-  {path: '/the-dark-knight-rises', component: TheDarkKnightRisesBlurb}
+  {path: '/the-dark-knight-rises', component: TheDarkKnightRisesBlurb},
+  {
+    path: '/:pathMatch(.*)*',
+    component: {
+      name: 'not-found-blurb',
+      template: `<h2>Not Found :(. Pick a movie from the list!</h2>`
+    }
+  }
 ]
-
-const View = {
-  name: 'router-view',
-  template: `<component :is="currentView"></component>`,
-  data() {
-    return {
-      currentView: {},
-    }
-  },
-  created() {
-    if (this.getRouteObject() === undefined) {
-      this.currentView = {
-        template: `<h2>Not Found :(. Pick a movie from the list!</h2>`
-      };
-    } else {
-      this.currentView = this.getRouteObject().component;
-    }
-  },
-  methods: {
-    getRouteObject() {
-      return routes.find(
-        (route) => route.path === window.location.pathname
-      );
-    }
-  },
-}
 
 const App = {
   name: 'App',
   template: `<div id="app">
     <div class="movies">
       <h2>Which movie?</h2>
-      <a href="/dunkirk">/dunkirk</a>
-      <a href="/interstellar">/interstellar</a>
-      <a href="/the-dark-knight-rises">/the-dark-knight-rises</a>
+      <router-link to="/dunkirk">/dunkirk</router-link>
+      <router-link to="/interstellar">/interstellar</router-link>
+      <router-link to="/the-dark-knight-rises">/the-dark-knight-rises</router-link>
 
       <router-view></router-view>
     </div>
-  </div>`,
-  components: {
-    'router-view': View
-  }
+  </div>`
 };
+
+export const router = createRouter({
+  history: createWebHistory(),
+  routes
+});
 
 export default App;
