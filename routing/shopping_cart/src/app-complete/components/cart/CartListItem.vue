@@ -4,11 +4,13 @@
       <p class="is-inline">{{ cartItem.title }}</p>
       <div>
         <span class="cart-item--price has-text-primary has-text-weight-bold">
-         ${{ cartItem.price }} x {{ cartItem.quantity }}
+          ${{ cartItem.price }} x {{ cartItem.quantity }}
         </span>
         <span>
-          <i @click="addCartItem(cartItem)" class="fa fa-arrow-circle-up cart-item__modify"></i>
-          <i @click="removeCartItem(cartItem)" class="fa fa-arrow-circle-down cart-item__modify"></i>
+          <i @click="addCartItem(cartItem)"
+            class="fa fa-arrow-circle-up cart-item__modify"></i>
+          <i @click="removeCartItem(cartItem)"
+            class="fa fa-arrow-circle-down cart-item__modify"></i>
         </span>
       </div>
     </div>
@@ -19,18 +21,15 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import {mapActions} from 'vuex';
 
 export default {
   name: 'CartListItem',
   props: ['cartItem'],
   methods: {
-    ...mapActions([
-      'addCartItem',
-      'removeCartItem'
-    ])
+    ...mapActions(['addCartItem', 'removeCartItem'])
   }
-}
+};
 </script>
 
 <style scoped>
@@ -45,10 +44,6 @@ export default {
   padding: 10px;
 }
 
-.cart-item--price {
-  margin-right: 12px;
-}
-
 .cart-item__image img {
   float: right;
   height: 70px;
@@ -56,6 +51,6 @@ export default {
 
 .cart-item__modify {
   cursor: pointer;
-  margin: 0 3px;
+  margin: 0 1px;
 }
 </style>

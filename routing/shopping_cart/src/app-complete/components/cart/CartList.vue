@@ -27,21 +27,27 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import CartListItem from './CartListItem';
 
 export default {
   name: 'CartList',
   computed: {
-    ...mapGetters(['cartItems', 'cartTotal', 'cartQuantity'])
+    ...mapGetters([
+      'cartItems',
+      'cartTotal',
+      'cartQuantity'
+    ])
   },
   methods: {
-    ...mapActions(['removeAllCartItems'])
+    ...mapActions([
+      'removeAllCartItems'
+    ])
   },
   components: {
     CartListItem
   }
-};
+}
 </script>
 
 <style scoped>
